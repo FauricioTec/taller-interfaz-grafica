@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter.font import Font
 from tkinter import LEFT, RIGHT, BOTH, Y, CENTER, W, E, N, S
+from tkinter import ttk
 
 root = tk.Tk() # Crea la ventana principal
 
@@ -42,7 +43,7 @@ tituloBarraLateral = tk.Label(contenedorLateral, text='¡Consulta tu tabla de pa
 tituloBarraLateral.place(anchor=CENTER, relx=.5, rely=.15)  #Se usa el anchor center y el relx para colocar el label en el medio
 # Definimos las fuentes para los entrys
 fuenteEntry = Font(family="Segoe UI", size=12)
-fuenteLabelEntry = Font(family="Segoe UI", size=8, weight='bold')
+fuenteLabelEntry = Font(family="Segoe UI", size=9, weight='bold')
 
 # Label y Entry para Nombre
 labelInputNombre = tk.Label(contenedorLateral, text="Nombre del cliente", bg=colores['negro'], fg='white', font=fuenteLabelEntry)
@@ -68,6 +69,22 @@ labelInputInteres.place(anchor=W, relx=.14, rely=.55)
 inputInteres = tk.Entry(contenedorLateral, bg='white', fg='black', font=fuenteEntry, width=20, bd=2, relief="solid")
 inputInteres.place(anchor=CENTER, relx=.5, rely=.6)
 
+# IMPORTANTE: Todo lo que se obtiene un de un tk.Entry se obtiene como un String
+
+# Adicional: Hay un Widget llamado Text que probablemente les sera mas util para el proyecto
+
+#Colocamos el primer combobox
+
+# Label para el Combobox
+labelTipoAmortizacion = tk.Label(contenedorLateral, text="Sistema de amortización", bg=colores['negro'], fg='white', font=fuenteLabelEntry)
+labelTipoAmortizacion.place(anchor=CENTER, relx=.5, rely=.67)
+
+fuenteCombox = Font(family="Segoe UI", size=10)
+
+# Combobox para seleccionar el tipo de amortización
+tipoAmortizacion = ttk.Combobox(contenedorLateral, values=["Frances", "Americano"], font=fuenteCombox, width=10)
+tipoAmortizacion.state(["readonly"])
+tipoAmortizacion.place(anchor=CENTER, relx=.5, rely=.72)
 
 # Notese que el root.mainloop() debe ser lo ultimo que se ejecute
 root.mainloop() # Mantiene la ventana abierta
