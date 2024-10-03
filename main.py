@@ -36,11 +36,12 @@ contenedorPrincipal = tk.Frame(root, bg=colores['naranja_palido'])
 contenedorPrincipal.pack(side=RIGHT, fill=BOTH, expand=True)
 
 # Definimos la fuente
-fuenteTituloLateral = Font(family="Segoe UI Semibold", size=17, slant="roman")
+fuenteTituloLateral = Font(family="Segoe UI Semibold", size=16, slant="roman")
 
 # Colocamos el primer Label
 tituloBarraLateral = tk.Label(contenedorLateral, text='¡Consulta tu tabla de pagos!', bg=colores['negro'], fg='white', font=fuenteTituloLateral, wraplength=200)
 tituloBarraLateral.place(anchor=CENTER, relx=.5, rely=.15)  #Se usa el anchor center y el relx para colocar el label en el medio
+
 # Definimos las fuentes para los entrys
 fuenteEntry = Font(family="Segoe UI", size=12)
 fuenteLabelEntry = Font(family="Segoe UI", size=9, weight='bold')
@@ -83,8 +84,19 @@ fuenteCombox = Font(family="Segoe UI", size=10)
 
 # Combobox para seleccionar el tipo de amortización
 tipoAmortizacion = ttk.Combobox(contenedorLateral, values=["Frances", "Americano"], font=fuenteCombox, width=10)
-tipoAmortizacion.state(["readonly"])
+tipoAmortizacion.state(["readonly"]) # Elimina la posibilidad de escribir sobre el combobox
 tipoAmortizacion.place(anchor=CENTER, relx=.5, rely=.72)
+
+
+#Colocamos un boton
+
+
+# Definimos la fuente para el botón
+fuenteBoton = Font(family="Segoe UI", size=11, weight='bold')
+
+# Botón para calcular con fuente bold y bordes redondeados
+botonCalcular = tk.Button(contenedorLateral, text="Calcular", bg=colores['naranja_claro'], fg='black', font=fuenteBoton, width=13, height=2, relief="solid", bd=2)
+botonCalcular.place(anchor=CENTER, relx=.5, rely=.85)
 
 # Notese que el root.mainloop() debe ser lo ultimo que se ejecute
 root.mainloop() # Mantiene la ventana abierta
