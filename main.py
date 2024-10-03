@@ -35,11 +35,11 @@ contenedorPrincipal = tk.Frame(root, bg=colores['naranja_palido'])
 contenedorPrincipal.pack(side=RIGHT, fill=BOTH, expand=True)
 
 # Definimos la fuente
-fuente_segoe = Font(family="Segoe UI", size=17, weight='bold', slant="roman")
+fuente_segoe = Font(family="Segoe UI Semibold", size=17, slant="roman")
 
 # Colocamos el primer Label
 tituloBarraLateral = tk.Label(contenedorLateral, text='¡Consulta tu tabla de pagos!', bg=colores['negro'], fg='white', font=fuente_segoe, wraplength=200)
-tituloBarraLateral.place(anchor=CENTER, relx=.5, rely=.15)  #Se usa el anchos y el relx para colocar el label en el medio
+tituloBarraLateral.place(anchor=CENTER, relx=.5, rely=.15)  #Se usa el anchor center y el relx para colocar el label en el medio
 
 # Notese que el root.mainloop() debe ser lo ultimo que se ejecute
 root.mainloop() # Mantiene la ventana abierta
