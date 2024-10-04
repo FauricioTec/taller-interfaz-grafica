@@ -132,7 +132,7 @@ style = ttk.Style()
 style.theme_use('clam')
 
 # Configuramos el estilo del Treeview
-style.configure('Treeview.Heading', background=colores['azul_oscuro'], foreground='white', relief='flat')  # Añadimos foreground para el texto
+style.configure('Treeview.Heading', background=colores['azul_oscuro'], foreground='white', relief='flat')
 style.map('Treeview.Heading', background=[('selected', colores['azul_oscuro'])], foreground=[('selected', 'white')])
 style.configure('Treeview', background=colores['azul_grisaceo_claro'], fieldbackground=colores['azul_grisaceo_claro'], foreground='black')
 
@@ -177,6 +177,29 @@ tabla.tag_configure('impar', background=colores['azul_grisaceo_claro'])
 
 # Empaquetamos la tabla
 tabla.grid(row=5, column=0, padx=20, pady=(10, 20), sticky=N)
+
+# Agregar command al boton con el metodo .config
+# Recomendacion: Agregar los metodos luego de haber creado todos los widgets,
+# y asignarlos a los botonoes con el metodo .config
+
+def mostrarDatosEnText():
+    nombre = inputNombre.get()
+    monto = inputMonto.get()
+    plazo = inputPlazo.get()
+    interes = inputInteres.get()
+    tipo_amortizacion = tipoAmortizacionCombobox.get()
+
+    print(textResultados.get('1.0', tk.END)) 
+    # Notese que para acceder al texto de un Text se usa el metodo get con los parametros '1.0' y tk.END
+
+    textResultados.delete('1.0', tk.END)
+    textResultados.insert(tk.END, f"Nombre: {nombre}\n")
+    textResultados.insert(tk.END, f"Monto: {monto}\n")
+    textResultados.insert(tk.END, f"Plazo: {plazo}\n")
+    textResultados.insert(tk.END, f"Interés: {interes}\n")
+    textResultados.insert(tk.END, f"Tipo de amortización: {tipo_amortizacion}\n")
+
+botonCalcular.config(command=mostrarDatosEnText)
 
 # Notese que el root.mainloop() debe ser lo ultimo que se ejecute
 root.mainloop() # Mantiene la ventana abierta
