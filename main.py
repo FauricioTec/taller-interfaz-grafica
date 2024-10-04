@@ -92,18 +92,39 @@ tipoAmortizacionCombobox.place(anchor=CENTER, relx=.5, rely=.72)
 # Definimos la fuente para el botón
 fuenteBoton = Font(family="Segoe UI", size=11, weight='bold')
 
-def imprimirInputs(): # Notese que la funcion que va a ejecutar el comando debe tener argumentos
-    # Si ocupan ejecutar una funcion con argumentos "envuelvanla" dentro de una funcion sin argumentos
-    print(inputNombre.get())
-    print(inputMonto.get())
-    print(inputInteres.get())
-    print(inputPlazo.get())
-    print(tipoAmortizacionCombobox.get())
-    #Notese ademas que con el .get se obtiene el valor del Entry en formato string
-
 # Botón para calcular con fuente bold y bordes redondeados
-botonCalcular = tk.Button(contenedorLateral, text="Calcular", bg=colores['naranja_claro'], fg='black', font=fuenteBoton, width=13, height=2, relief="solid", bd=2, command=imprimirInputs)
+botonCalcular = tk.Button(contenedorLateral, text="Calcular", bg=colores['naranja_claro'], fg='black', font=fuenteBoton, width=13, height=2, relief="solid", bd=2)
 botonCalcular.place(anchor=CENTER, relx=.5, rely=.85)
+
+# Se continua con el panel principal o el frame principal, para ejemplifiar como funciona ahora usaremos el metodo grid
+
+# Definimos la fuente para los labels del panel principal
+fuenteLabelPrincipal = Font(family="Segoe UI", size=12, weight='bold')
+
+# Label con los datos de la consulta
+labelDatosConsulta = tk.Label(contenedorPrincipal, text="Datos de la consulta", bg=colores['naranja_palido'], fg=colores['negro'], font=fuenteLabelPrincipal)
+labelDatosConsulta.grid(row=0, column=0, padx=20, pady=(20, 10), sticky=W) # Se coloca como en una tabla o matriz
+# el parametro Sticky W significa que se alineara el Widget a la izquierda de la celda
+
+# Canvas para la línea horizontal
+canvasLinea = tk.Canvas(contenedorPrincipal, width=600, height=2, bg=colores['naranja_palido'], highlightthickness=0)
+canvasLinea.grid(row=1, column=0, padx=20, pady=5, sticky=W)
+canvasLinea.create_line(0, 1, 600, 1, fill=colores['negro'])
+
+# Cambio con respecto a la imagen de referencia, haremos uso del widget Text, para que lo implementen tambien en sus proyectos
+
+# Widget Text para mostrar resultados
+textResultados = tk.Text(contenedorPrincipal, bg='white', fg='black', font=fuenteEntry, width=50, height=10, wrap='word', bd=2, relief="solid")
+textResultados.grid(row=2, column=0, padx=20, pady=(10, 5), sticky=N)
+
+# Label con los resultados de la consulta
+labelResultados = tk.Label(contenedorPrincipal, text="Resultados de la consulta", bg=colores['naranja_palido'], fg=colores['negro'], font=fuenteLabelPrincipal)
+labelResultados.grid(row=3, column=0, padx=20, pady=(10, 5), sticky=W)
+
+# Canvas para la línea horizontal debajo del labelResultados
+canvasLineaResultados = tk.Canvas(contenedorPrincipal, width=600, height=2, bg=colores['naranja_palido'], highlightthickness=0)
+canvasLineaResultados.grid(row=4, column=0, padx=20, pady=5, sticky=W)
+canvasLineaResultados.create_line(0, 1, 600, 1, fill=colores['negro'])
 
 # Notese que el root.mainloop() debe ser lo ultimo que se ejecute
 root.mainloop() # Mantiene la ventana abierta
