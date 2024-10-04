@@ -7,7 +7,7 @@ colores = {
     'naranja_palido': '#fff8f0', 
     'negro': '#1e1e24', 
     'negro_azulado': '#14141b', 
-    'azul_grisaceo_claro': '#0a0a96', 
+    'azul': '#0a0a96', 
     'blanco_azulado': '#dee4f7', 
     'azul_oscuro': '#0b1432', 
     'azul_grisaceo_claro': '#eef1fb', 
@@ -125,6 +125,58 @@ labelResultados.grid(row=3, column=0, padx=20, pady=(10, 5), sticky=W)
 canvasLineaResultados = tk.Canvas(contenedorPrincipal, width=600, height=2, bg=colores['naranja_palido'], highlightthickness=0)
 canvasLineaResultados.grid(row=4, column=0, padx=20, pady=5, sticky=W)
 canvasLineaResultados.create_line(0, 1, 600, 1, fill=colores['negro'])
+
+# Ahora colocaremos el TreeView o la tabla
+# Cambiamos el tema a 'clam'
+style = ttk.Style()
+style.theme_use('clam')
+
+# Configuramos el estilo del Treeview
+style.configure('Treeview.Heading', background=colores['azul_oscuro'], foreground='white', relief='flat')  # Añadimos foreground para el texto
+style.map('Treeview.Heading', background=[('selected', colores['azul_oscuro'])], foreground=[('selected', 'white')])
+style.configure('Treeview', background=colores['azul_grisaceo_claro'], fieldbackground=colores['azul_grisaceo_claro'], foreground='black')
+
+# Creamos la tabla
+tabla = ttk.Treeview(contenedorPrincipal, selectmode='browse', height=9)
+
+tabla['columns'] = ('periodo', 'saldo_inicial', 'cuota', 'interes', 'amortizacion', 'saldo_final')
+
+# Configuramos los encabezados de las columnas
+tabla.heading('#0', text='', anchor=CENTER)
+tabla.heading('periodo', text='Periodo', anchor=CENTER)
+tabla.heading('saldo_inicial', text='Saldo Inicial', anchor=CENTER)
+tabla.heading('cuota', text='Cuota', anchor=CENTER)
+tabla.heading('interes', text='Interés', anchor=CENTER)
+tabla.heading('amortizacion', text='Amortización', anchor=CENTER)
+tabla.heading('saldo_final', text='Saldo Final', anchor=CENTER)
+
+# Configuramos el ancho de las columnas
+tabla.column('#0', width=0, stretch=tk.NO)  # Esto hará que no se muestre la columna por defecto
+tabla.column('periodo', anchor=CENTER, width=80)
+tabla.column('saldo_inicial', anchor=CENTER, width=100)
+tabla.column('cuota', anchor=CENTER, width=80)
+tabla.column('interes', anchor=CENTER, width=80)
+tabla.column('amortizacion', anchor=CENTER, width=100)
+tabla.column('saldo_final', anchor=CENTER, width=100)
+
+# Insertamos datos de ejemplo
+datos_ejemplo = [
+    ('1', '1000', '150', '50', '100', '900'),
+    ('2', '900', '150', '45', '105', '795'),
+    ('3', '795', '150', '40', '110', '685'),
+    ('4', '685', '150', '35', '115', '570'),
+]
+
+# Alternar colores de fondo para las filas
+for i, dato in enumerate(datos_ejemplo):
+    tag = 'par' if i % 2 == 0 else 'impar'
+    tabla.insert('', 'end', values=dato, tags=(tag,))
+
+tabla.tag_configure('par', background=colores['blanco_azulado'])
+tabla.tag_configure('impar', background=colores['azul_grisaceo_claro'])
+
+# Empaquetamos la tabla
+tabla.grid(row=5, column=0, padx=20, pady=(10, 20), sticky=N)
 
 # Notese que el root.mainloop() debe ser lo ultimo que se ejecute
 root.mainloop() # Mantiene la ventana abierta
